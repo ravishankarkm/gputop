@@ -14,7 +14,6 @@ addons:
             - autopoint
             - python-lxml
             - libgl1-mesa-dev
-            - emscripten
 
 cache:
     directories:
@@ -34,6 +33,8 @@ env:
         - CONFIG_OPTS="--disable-debug --disable-gl --enable-webui"
 
 before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install -y emscripten
     - emcc -v
     - (if test -d protobuf/lib; then echo OK; else
             git clone --single-branch --branch master --depth 1 https://github.com/google/protobuf protobuf-src &&
